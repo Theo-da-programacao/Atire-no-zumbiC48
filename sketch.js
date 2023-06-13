@@ -10,6 +10,7 @@ var bulletGroup;
 var bulletImg;
 var gameState = "fight";
 var life = 3;
+var score = 0;
 
 
 function preload(){
@@ -87,6 +88,9 @@ function draw() {
   if (life == 0){
     gameState = "lost"
   }
+  if(score == 105){
+    gameState = "won"
+  }
 
   //movendo o jogador para cima e para baixo e tornando o jogo compatível com dispositivos móveis usando toques
 if(keyDown("UP_ARROW")||touches.length>0){
@@ -116,7 +120,7 @@ if(zombieGroup.isTouching(bulletGroup)){
     if(zombieGroup[i].isTouching(bulletGroup)){
       zombieGroup[i].destroy();
       bulletGroup.destroyEach();
-      
+      score = score + 5
     }
   }
 }
@@ -175,7 +179,7 @@ if(zombieGroup.isTouching(player)){
 
 
   function enemy (){
-    if(frameCount%55 === 0){
+    if(frameCount%30 === 0){
       zombie = createSprite(random(800,1100), random(390,500),40,40);
       zombie.addImage(zombieImg);
       zombie.scale = 0.9;
@@ -186,3 +190,4 @@ if(zombieGroup.isTouching(player)){
 
     }
   }
+}
